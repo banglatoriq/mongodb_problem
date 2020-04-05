@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Hello Mongo</h1>
+        <p id="userName"></p>
+        <div class="row">
+                <input type="text" placeholder="Product Name" class="from-control" id="name"><br>
+                <input type="text" placeholder="Price $" class="from-control" id="price"><br>
+                <input type="text" placeholder="Stock" class="from-control" id="stock"><br>
+                <button class="btn btn-primary" id="addProduct">Add User</button>
+            </div>
+    </div>
+    
+    <script>
+       const btnAddProduct = document.getElementById('addProduct');
+       btnAddProduct.addEventListener('click',() => {
+           const name = document.getElementById('name').value;
+           const price = document.getElementById('price').value;
+           const stock  = document.getElementById('stock').value;
+           const product = {name,price,stock};
+           console.log(product);
+           fetch('http://localhost:3000/addProduct',{
+               method:'POST',
+               body:JSON.stringify(product),
+               headers:{
+                   "Content-type":"application/json; charset=UTF-8"
+               }
+           })
+            .then(response => response.json())
+            .then(data =>updateUser(data))
+       })
+       function updateUser(){
+           document.getElementById('userName').innerText = user.name;
+       }
+
+    </script>
+</body>
+</html>
